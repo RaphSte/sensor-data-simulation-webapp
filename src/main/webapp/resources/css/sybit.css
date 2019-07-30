@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+html, body {margin:0;height:100%}
+body {color:#325050;font-family:sans-serif;font-size:70%;}
+.page {position:relative;min-height:100%}
+
+header {padding:20px 0 40px 0;background-color:#b4b4b4;text-align:left;color:#000000;}
+.logo-image {position:absolute;top:0px;left:20px;height:60px;}
+.logo-image2 {position:absolute;top:65px;left:40px;height:35px;}
+.header-title {position: relative; top:10px;text-align:center;font-size:30pt;}
+.header-username {position:absolute;top:40px;left:75%;font-size:15pt;}
+
+.content {min-height:380px;padding-bottom:100px;}
+.form-login {min-height:460px;position:relative;top:20px;left:20px;width:300px;margin:auto;}
+.error-msg {color:red;font-weight:bold;}
+.form-standard {min-height:600px;position:relative;top:20px;left:20px;width:1200px;margin:auto;}
+
+footer {position:absolute;bottom:0;width:100%;min-height:75px;background-color:#b4b4b4;color:#000000;text-align:center;}
+.impressum {font-size:6pt}
+
+a:link {color:blue;}
+a:visited {color:#8000ff;}
+
+.table-row{cursor:pointer;}
+
+.foreground{z-index: 1 !important;}
+
+.overflow-hidden{overflow: hidden;}
+
+.link-btn:visited{color: white;}
+.link-btn{color: white !important;}

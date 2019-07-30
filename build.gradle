@@ -1,0 +1,91 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+bootWar {
+    baseName = 'machine-simulator'
+    mainClassName = 'de.sybit.machine-simulator.Application'
+}
+
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://delia.sybit.de:8082"
+        property "sonar.login", "8d6e236093f853b84f4ae83bfa27e44f0c62f20f"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.exclusions", "**/*Test*/**"
+        property "sonar.inclusions", "**/*main/java*/**"
+        property "sonar.test.inclusions", "**/*Test*/**"
+        property "sonar.tests", "src/test/java/de/sybit/machine-simulator/controller,src/test/java/de/sybit/machine-simulator/service"
+        property "sonar.java.test.binaries", "**/classes/java/test/**"
+        property "sonar.language", "java"
+        property "sonar.sources", "src"
+        property "sonar.junit.reportPaths", "build/test-results/test"
+        property "sonar.coverage.exclusions", "**/exception/**,**/entity/**,**/repository/**"
+        property "sonar.projectKey", "machine-simulator"
+        property "sonar.projectName", "machine-simulator"
+    }
+}
+
+
+group = 'de.sybit'
+//version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    //all*.exclude module : 'spring-boot-starter-logging'
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-websocket')
+    //compile('org.springframework.boot:spring-boot-starter-security') //f�r Spring Security
+    compile('jstl:jstl:1.2')
+    //if in Memory DB h2 is used
+    compile('com.h2database:h2')
+    //initialize DB (tables, content)
+    compile('org.flywaydb:flyway-core:5.1.4')
+    //important if running with Java 9,10
+    compile('javax.xml.bind:jaxb-api:2.3.0')
+    compile('org.apache.commons:commons-lang3:3.8')
+    compile('org.apache.commons:commons-text:1.6')
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    compile('org.apache.httpcomponents:httpclient:4.5.6')
+
+    // https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.client.mqttv3
+    compile group: 'org.eclipse.paho', name: 'org.eclipse.paho.client.mqttv3', version: '1.2.0'
+
+    runtime('org.springframework.boot:spring-boot-devtools')
+    runtime('mysql:mysql-connector-java')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
