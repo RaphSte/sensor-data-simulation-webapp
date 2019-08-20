@@ -17,7 +17,7 @@ Start
   - The server can now be started. The startup process can take a few seconds.
 
 The simulator can be reached as follows:
-  1. <Hostname>:<Port>/machine-simulator/
-  2. <Hostname>:<Port>/machine-simulator/home
+  1. hostname:port/machine-simulator/
+  2. hostname:port/machine-simulator/home
   
 The setup and installation are now complete. The simulator is now ready for use.
